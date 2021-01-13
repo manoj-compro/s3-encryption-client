@@ -1,0 +1,17 @@
+{
+  "name": "s3-encription",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.825.0",
+    "node-s3-encryption-client": "^0.1.1"
+  }
+}
