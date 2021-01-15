@@ -44,13 +44,13 @@ async function s3PutObjectWithEncryption() {
                 },
             }
         }
-        const t1 = Date.now();
+        console.time('encryptAndPutObj');
         S3Encript.putObject(putParams, function (err, data) {
             if (err) {
                 console.log("Error", err);
             }
             if (data) {
-                console.log(`s3PutObjectWithEncryption,${Date.now() - t1}`);
+                console.timeEnd('encryptAndPutObj');
                 resolve(data);
             }
         });
@@ -65,8 +65,9 @@ async function s3PutObjectWithoutEncryption() {
     };
     const t1 = Date.now();
     try {
+        console.time('simplePutObj');
         await new AWS.S3().putObject(params).promise();
-        console.log(`s3PutObjectWithoutEncryption,${Date.now() - t1}`);
+        console.timeEnd('simplePutObj');
     }
     catch (e) {
         console.log(e);
@@ -82,13 +83,13 @@ async function s3GetObjectWithEncryption() {
                 'company': 'compro'
             }
         };
-        const t1 = Date.now();
+        console.time('decryptAndGetObj');
         S3Encript.getObject(getParams, function (err, data) {
             if (err) {
                 console.log("Error", err);
             }
             if (data) {
-                console.log(`s3GetObjectWithEncryption,${Date.now() - t1}`);
+                console.timeEnd('decryptAndGetObj');
                 console.log(data.Body.toString());
                 resolve(data);
             }
@@ -101,9 +102,9 @@ async function s3GetObjectWithoutEncryption() {
         Bucket: bucketName,
         Key: bucketKeyForPlainData
     };
-    const t1 = Date.now();
+    console.time('simpleGetObj');
     const data = await new AWS.S3().getObject(params).promise().then((data) => data.Body.toString());
-    console.log(`s3GetObjectWithoutEncryption,${Date.now() - t1}`);
+    console.timeEnd('simpleGetObj');
     console.log(data);
 }
 
