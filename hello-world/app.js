@@ -30,7 +30,7 @@ const bucketName = 'cup-central-local-ltigw';
 const bucketKeyForEncryptedData = 'test-manoj/encrypted.txt'
 const bucketKeyForPlainData = 'test-manoj/plain.txt'
 
-function s3PutObjectWithEncryption() {
+async function s3PutObjectWithEncryption() {
     return new Promise((resolve) => {
         var putParams = {
             Bucket: bucketName,
